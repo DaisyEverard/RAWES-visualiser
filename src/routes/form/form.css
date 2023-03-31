@@ -38,34 +38,34 @@ tr:nth-child(even) th textarea {
     color: white; 
 }
 /* provisioning table */
-#provisioning-table tbody tr:nth-child(even) {
+#provTable tbody tr:nth-child(even) {
     background-color: rgb(42 88 42);
 }
-#provisioning-table tbody tr:nth-child(odd) {
+#provTable tbody tr:nth-child(odd) {
     background-color: #a6d0a6;
 }
 
 /* regulating table */
-#regulating-table tbody tr:nth-child(even) {
+#reguTable tbody tr:nth-child(even) {
     background-color: #18188f;
 }
-#regulating-table tbody tr:nth-child(odd) {
+#reguTable tbody tr:nth-child(odd) {
     background-color: lightblue;
 }
 
 /* cultural table */
-#cultural-table tbody tr:nth-child(even) {
+#cultTable tbody tr:nth-child(even) {
     background-color: rgb(121, 121, 19);
 }
-#cultural-table tbody tr:nth-child(odd) {
+#cultTable tbody tr:nth-child(odd) {
     background-color: rgb(255, 255, 195);
 }
 
 /* supporting table */
-#supporting-table tbody tr:nth-child(even) {
+#suppTable tbody tr:nth-child(even) {
     background-color: hwb(0 5% 59%);
 }
-#supporting-table tbody tr:nth-child(odd) {
+#suppTable tbody tr:nth-child(odd) {
     background-color: rgb(226, 181, 188);
 }
 

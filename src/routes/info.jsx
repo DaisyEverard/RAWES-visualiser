@@ -1,7 +1,6 @@
 import React from "react";
 
 const Info = () => {
-
     return     <div id="info-tab" className="tab">
     <h1>How It Works</h1>
     <p>What the symbols mean, and their percieved value in semi-statistical analysis</p>
