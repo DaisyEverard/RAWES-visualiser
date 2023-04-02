@@ -26,16 +26,16 @@ const Form = () => {
     <form id="rawes-data">
         
         <h2>Provisioning Services</h2>
-        <Table list={provList} tableName={"provTable"}/>
+        <Table list={provList} updateList={setProvList} tableName={"provTable"}/>
 
         <h2>Regulating Services</h2>
-        <Table list={reguList} tableName={"reguTable"}/>
+        <Table list={reguList} updateList={setReguList} tableName={"reguTable"}/>
 
         <h2>Cultural Services</h2>
-        <Table list={cultList} tableName={"cultTable"}/>
+        <Table list={cultList} updateList={setCultList} tableName={"cultTable"}/>
 
         <h2>Supporting Services</h2>
-        <Table list={suppList} tableName={"suppTable"}/>
+        <Table list={suppList} updateList={setSuppList} tableName={"suppTable"}/>
 
         <div className="flex-row">
             <label htmlFor="form-date">Date:</label>

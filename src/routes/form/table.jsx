@@ -3,15 +3,16 @@ import Row from "./row";
 
 const Table = (props) => {
     const list = props.list
-    const table = props.tableName
+    const tableName = props.tableName
+    const updateList = props.updateList
 
-  const setupRows = (list, table) => {
+  const setupRows = (list) => {
       return list.map((item, index) => (
-      <Row key={index} title={item} tableName={table} />
+      <Row key={index} title={item} tableName={tableName} list={list} updateList={updateList} />
     ));
   };
 
-    return <table id={table} data-table={table}>
+    return <table id={tableName} data-table={tableName}>
      <thead>
        <tr>
         <th>Service</th>
@@ -23,7 +24,7 @@ const Table = (props) => {
       </tr>
      </thead>
      <tbody>
-            {setupRows(list, table)}
+            {setupRows(list)}
      </tbody>
     </table>
 }

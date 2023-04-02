@@ -2,17 +2,6 @@ const provisioning = document.querySelector('#provisioning-table')
 const regulating = document.querySelector('#regulating-table')
 const cultural = document.querySelector('#cultural-table')
 const supporting = document.querySelector('#supporting-table')
-const allTables = document.querySelectorAll('table')
-const proBody = provisioning.querySelector('tbody'); 
-const regBody = regulating.querySelector('tbody'); 
-const culBody = cultural.querySelector('tbody'); 
-const supBody = supporting.querySelector('tbody'); 
-
-// add initial rows
-provisioningArray.forEach((item) => {proBody.innerHTML += rowSetup(item, 'provisioning');})
-regulatingArray.forEach((item) => {regBody.innerHTML += rowSetup(item, 'regulating')})
-culturalArray.forEach((item) => {culBody.innerHTML += rowSetup(item, 'cultural')})
-supportingArray.forEach((item) => {supBody.innerHTML += rowSetup(item, 'supporting')})
 
 // add/remove row button functionality
 mainTab.addEventListener('click', (event) => {
