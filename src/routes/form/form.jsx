@@ -22,20 +22,22 @@ const Form = () => {
    const [suppList, setSuppList] = useState(['soil formation', 'Primary production', 'Nutrient cycling',
    'Water recycling', 'provision of habitat'])
         
+   const getTable = (list, updateListFunction, serviceType) => {
+    const tableName = serviceType.substring(0, 4).toLowerCase() + "Table"; 
+
+    return <div>
+        <h2>{serviceType} Services</h2>
+        <Table list={list} updateList={updateListFunction} tableName={tableName}></Table>
+    </div>
+   }
+
     return     <div id="main-tab">
     <form id="rawes-data">
         
-        <h2>Provisioning Services</h2>
-        <Table list={provList} updateList={setProvList} tableName={"provTable"}/>
-
-        <h2>Regulating Services</h2>
-        <Table list={reguList} updateList={setReguList} tableName={"reguTable"}/>
-
-        <h2>Cultural Services</h2>
-        <Table list={cultList} updateList={setCultList} tableName={"cultTable"}/>
-
-        <h2>Supporting Services</h2>
-        <Table list={suppList} updateList={setSuppList} tableName={"suppTable"}/>
+        {getTable(provList, setProvList, "Provisioning")}
+        {getTable(reguList, setReguList, "Regulating")}
+        {getTable(cultList, setCultList, "Cultural")}
+        {getTable(suppList, setSuppList, "Supporting")} 
 
         <div className="flex-row">
             <label htmlFor="form-date">Date:</label>
