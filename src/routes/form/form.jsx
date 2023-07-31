@@ -5,33 +5,35 @@ import Table from "./Table";
 import getTemplateList from "../../utils/api";
 
 const Form = () => {
-    console.log(getTemplateList("cultural")); 
+    const [provList, setProvList] = useState([]); 
+    const [reguList, setReguList] = useState([])
+   const [cultList, setCultList] = useState([])
+   const [suppList, setSuppList] = useState([]);
 
-    // const [provList, setProvList] = useState(["a", "set", "of", "stuff"]); 
-    const [isLoading, setIsLoading] = useState(false); 
+    const [isLoading, setIsLoading] = useState(true); 
 
-    // useEffect(() => {
-    //     setProvList(getTemplateList("provisioning"));
-    //     setIsLoading(false); 
-    // }, [])
-
-    // list of table row headers/services
-    const [provList, setProvList] = useState(['Provision of fresh water', 'Provision of food',
-    'Provision of fibre', 'Provision of fuel', 'Provision of genetic resources',
-    'Provision of natural medicines and pharmaceuticals', 'Provision of ornamental resources',
-    'Clay, mineral, aggregate harvesting', 'Waste disposal', 
-    'Energy harvesting from natural air and water flows'])
-    const [reguList, setReguList] = useState(['Air quality regulation', 'Local climate regulation',
-    'Global climate regulation', 'Water regulation', 'Flood hazard regulation',
-   'Storm hazard regulation', 'Pest regulation', 'Regulation of human diseases',
-    'Regulation of diseases affecting livestock', 'Erosion regulation', 'Water purification',
-   'Pollination', 'Salinity regulation', 'Fire regulation', 'Noise and visual buffering'])
-   const [cultList, setCultList] = useState(['Cultural heritage', 'Recreation and tourism', 'Aesthetic value',
-   'Spritual and religious value', 'Insipiration value', 'Social relations', 
-   'Education and research'
-   ])
-   const [suppList, setSuppList] = useState(['soil formation', 'Primary production', 'Nutrient cycling',
-   'Water recycling', 'provision of habitat']);
+    useEffect(() => {
+        const fetchData = async () => {
+          try {
+            const [provisioning, cultural, regulating, supporting] = await Promise.all([
+              getTemplateList('provisioning'),
+              getTemplateList('cultural'),
+              getTemplateList('regulating'),
+              getTemplateList('supporting'),
+            ]);
+    
+            setProvList(provisioning);
+            setCultList(cultural);
+            setReguList(regulating);
+            setSuppList(supporting);
+            setIsLoading(false);
+          } catch (error) {
+            console.error('Error fetching data:', error);
+            setIsLoading(false);
+          }
+        };
+        fetchData()
+      }, []);
         
    const getTable = (list, updateListFunction, serviceType) => {
     const tableName = serviceType.substring(0, 4).toLowerCase() + "Table"; 
@@ -42,6 +44,7 @@ const Form = () => {
     </div>
    }
 
+//    section for rendered component
    if (isLoading) return <div>Loading...</div>;
 
     return     <div id="main-tab">

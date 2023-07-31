@@ -13,7 +13,7 @@ const getApiData = async (route) => {
 
 const getTemplateList = async (type) => {
     const result = await getApiData(type);  
-    console.log(result.data.services);  
+    // console.log(result.data.services);  
     return result.data.services; 
 }
 
