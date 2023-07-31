@@ -1,9 +1,18 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import "./form.css"
 import Table from "./Table";
+import getTemplateList from "../../utils/api";
 
 const Form = () => {
+    // const [provList, setProvList] = useState(["a", "set", "of", "stuff"]); 
+    const [isLoading, setIsLoading] = useState(false); 
+
+    // useEffect(() => {
+    //     setProvList(getTemplateList("provisioning"));
+    //     setIsLoading(false); 
+    // }, [])
+
     // list of table row headers/services
     const [provList, setProvList] = useState(['Provision of fresh water', 'Provision of food',
     'Provision of fibre', 'Provision of fuel', 'Provision of genetic resources',
@@ -20,7 +29,7 @@ const Form = () => {
    'Education and research'
    ])
    const [suppList, setSuppList] = useState(['soil formation', 'Primary production', 'Nutrient cycling',
-   'Water recycling', 'provision of habitat'])
+   'Water recycling', 'provision of habitat']);
         
    const getTable = (list, updateListFunction, serviceType) => {
     const tableName = serviceType.substring(0, 4).toLowerCase() + "Table"; 
@@ -31,9 +40,10 @@ const Form = () => {
     </div>
    }
 
+   if (isLoading) return <div>Loading...</div>;
+
     return     <div id="main-tab">
     <form id="rawes-data">
-        
         {getTable(provList, setProvList, "Provisioning")}
         {getTable(reguList, setReguList, "Regulating")}
         {getTable(cultList, setCultList, "Cultural")}

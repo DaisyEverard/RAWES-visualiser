@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 
 const Row = (props) => {
-    const [title, setTitle] = useState(props.title)
     const tableName = props.tableName
     const list = props.list
     const updateList = props.updateList
+        const [title, setTitle] = useState(props.title)
     
     const newRowBefore = (e) => {
       e.preventDefault();
