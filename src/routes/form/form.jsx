@@ -5,6 +5,8 @@ import Table from "./Table";
 import getTemplateList from "../../utils/api";
 
 const Form = () => {
+    console.log(getTemplateList("cultural")); 
+
     // const [provList, setProvList] = useState(["a", "set", "of", "stuff"]); 
     const [isLoading, setIsLoading] = useState(false); 
 

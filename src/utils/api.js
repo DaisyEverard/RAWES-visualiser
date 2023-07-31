@@ -1,24 +1,20 @@
-const getApiData = async (route) => {
-let response = ""; 
-const base_url = "https://localhost:3000/"
-const queryUrl = base_url + route;
-console.log("queryUrl: " + queryUrl); 
+import axios from "axios";
+const base_url = "http://localhost:3000/"
 
-fetch(queryUrl)
-.then(res => {
-    console.log(res);
-    console.log(res.json); 
-    return res.json; 
-})
-.catch(err => {
-    console.log(err);
-})
+const getApiData = async (route) => {
+    const queryUrl = base_url + route;
+    try {
+        const result = await axios.get(base_url + route);
+        return result; 
+    } catch (error) {
+        console.error(error); 
+    }
 }
 
 const getTemplateList = async (type) => {
-    data = await getApiData(type);
-    console.log(type); 
-    return data.services; 
+    const result = await getApiData(type);  
+    console.log(result.data.services);  
+    return result.data.services; 
 }
 
 export default getTemplateList; 
