@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Row from "./row";
 
 const Table = (props) => {
@@ -11,6 +11,8 @@ const Table = (props) => {
       <Row key={index} title={item} tableName={tableName} list={list} updateList={updateList} />
     ));
   };
+
+  useEffect(() => {setupRows(list);}, [list]); 
 
     return <table id={tableName} data-table={tableName}>
      <thead>

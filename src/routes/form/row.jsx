@@ -7,10 +7,26 @@ const Row = (props) => {
     const updateList = props.updateList
     
     const newRowBefore = (e) => {
-      e.preventDefault()
-      console.log(list)
-      console.log(title)
+      e.preventDefault();
+      let newList = list; 
+      const indexOfItem = newList.indexOf(title)
+      const start = newList.slice(0,indexOfItem);
+      const end = newList.slice(indexOfItem);
+      newList = [...start, "", ...end];
+      updateList(newList); 
+      console.log(newList);
     }
+
+    const removeRow = (e) => {
+      e.preventDefault();
+      let newList = list; 
+      const indexOfItem = newList.indexOf(title)
+      const start = newList.slice(0,indexOfItem);
+      const end = newList.slice(indexOfItem + 1);
+      newList = [...start, ...end];
+      updateList(newList); 
+      console.log(newList);
+    }; 
 
     const handleTitleChange = (e) => {
       const titleIndex = list.indexOf(title)
@@ -20,7 +36,6 @@ const Row = (props) => {
 
       let newList = list
       newList[titleIndex] = newTitle
-      console.log(newList)
       updateList(newList)
     }
     
@@ -43,8 +58,8 @@ const Row = (props) => {
   <td className="plus-plus">
     <input type='radio' value={1} data-name={title} data-table={tableName}/> 
     <div>
-      <button className="new-row" onClick={(e) => { newRowBefore(e) }}>+</button>
-      <button className="delete-row">-</button>
+      <button className="new-row" onClick={(e) => { newRowBefore(e)}}>+</button>
+      <button className="delete-row" onClick={(e) => {removeRow(e)}}>-</button>
     </div>
   </td>
   </tr>
