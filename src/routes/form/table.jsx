@@ -15,9 +15,9 @@ const Table = ({list, tableName, updateList}) => {
      </tr>
     </thead>
     <tbody>
-           {list.map((item, index) => (
+           {list.map((item) => (
      <Row
-       key={index}
+       key={item}
        title={item}
        tableName={tableName}
        list={list}
