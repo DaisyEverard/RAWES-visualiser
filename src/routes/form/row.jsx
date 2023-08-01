@@ -44,19 +44,19 @@ const Row = (props) => {
     <textarea defaultValue={title} onChange={(e) => { handleTitleChange(e) }}></textarea>
   </th>
   <td className="minus-minus">
-    <input type='radio' value={-1} data-name={title} data-table={tableName}/>
+    <input type='radio' value={-1} name={title} data-name={title} data-table={tableName}/>
   </td>
   <td className="minus">
-    <input type='radio' value={-0.5} data-name={title} data-table={tableName}/>
+    <input type='radio' value={-0.5} name={title} data-name={title} data-table={tableName}/>
   </td>
   <td className="zero">
-    <input type='radio' value={0} data-name={title} data-table={tableName}/>
+    <input type='radio' value={0} name={title} data-name={title} data-table={tableName}/>
   </td>
   <td className="plus">
-    <input type='radio' value={0.5} data-name={title} data-table={tableName}/>
+    <input type='radio' value={0.5} name={title} data-name={title} data-table={tableName}/>
   </td>
   <td className="plus-plus">
-    <input type='radio' value={1} data-name={title} data-table={tableName}/> 
+    <input type='radio' value={1} name={title} data-name={title} data-table={tableName}/> 
     <div>
       <button className="new-row" onClick={(e) => { newRowBefore(e)}}>+</button>
       <button className="delete-row" onClick={(e) => {removeRow(e)}}>-</button>

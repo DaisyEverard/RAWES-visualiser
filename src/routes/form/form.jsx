@@ -5,10 +5,10 @@ import Table from "./Table";
 import getTemplateList from "../../utils/api";
 
 const Form = () => {
-    const [provList, setProvList] = useState([]); 
-    const [reguList, setReguList] = useState([])
-   const [cultList, setCultList] = useState([])
-   const [suppList, setSuppList] = useState([]);
+    const [provList, setProvList] = useState(["default"]); 
+    const [reguList, setReguList] = useState(["default"])
+   const [cultList, setCultList] = useState(["default"])
+   const [suppList, setSuppList] = useState(["default"]);
 
     const [isLoading, setIsLoading] = useState(true); 
 
