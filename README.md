@@ -49,10 +49,10 @@ To fill out the form:
 ## Future Development Options
 
 - When you remove all rows in a service, no way to add back again
+- remove data box and use timestamp instead
 - track changes over time
 - Split data based on scale (e.g. local, regional, global)
 - Research whether services with 0 value are included in calculations or omitted
-- Add local storage in which data from each form submitted is stored in one object
 
 ## Contacts
 
