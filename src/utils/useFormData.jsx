@@ -1,22 +1,14 @@
 import React from "react";
 
-const addDataToLocalStorage = (newForm) => {
-  if (newForm.length > 1) {
-    const local = JSON.parse(localStorage.getItem("rawesForms")) || [];
-    local.push(newForm);
-    localStorage.setItem("rawesForms", JSON.stringify(local));
-  }
-}
-
 const getDataOnFormSubmit = (e) => {
   e.preventDefault();
   const checkedBoxes = Array.from(
-    document.querySelectorAll('input:checked[data-name][data-table]')
+    document.querySelectorAll('input:checked[name][data-table]')
   );
-  const formArray = checkedBoxes.map((box) => ({
-    name: box.getAttribute("data-name"),
-    serviceType: box.getAttribute("data-table"),
-    value: box.getAttribute("value")
+  const formArray = checkedBoxes.map((service) => ({
+    name: service.getAttribute("name"),
+    serviceType: service.getAttribute("data-table"),
+    value: service.getAttribute("value")
   }));
   const timestamp = Date.now();
   formArray.unshift(timestamp); 
@@ -24,23 +16,9 @@ const getDataOnFormSubmit = (e) => {
   document.querySelectorAll('[type="radio"]').forEach((input) => {
     input.checked = false;
   });
-  addDataToLocalStorage(formArray); 
   return formArray; 
 };
 
-const getAllDataFromLocalStorage = () => {
-  const local = JSON.parse(localStorage.getItem("rawesForms")) || [];
-  return local; 
-}
+export {getDataOnFormSubmit};  
 
-const getTimestampFromLocalStorage = (timestamp) => {
-  const local = JSON.parse(localStorage.getItem("rawesForms")) || [];
-  let form = []; 
-  if (local.length) {
-    form = local.filter(form => form[0] == timestamp);
-  }
-  console.log(form); 
-  return form; 
-}
-
-export {getDataOnFormSubmit, getAllDataFromLocalStorage, getTimestampFromLocalStorage};  
+// new table - form_history (timestamp, service_type, service_name, value)

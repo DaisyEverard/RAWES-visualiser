@@ -1,9 +1,8 @@
-import React, { useEffect } from "react";
-import { useState } from "react";
+import React from "react";
 import "./form.css"
 import Table from "./Table";
-import getTemplateList from "../../utils/api";
 import { getDataOnFormSubmit } from "../../utils/useFormData";
+import { postNewForm } from "../../utils/api";
 
 const Form = () => {
         
@@ -23,7 +22,8 @@ const Form = () => {
 
         <div className="flex-row">
             <button id="submit-button" type="submit" onClick={(e) => {
-              getDataOnFormSubmit(e)
+              const data = getDataOnFormSubmit(e); 
+              postNewForm(data); 
             }}>Submit</button>
         </div>
     </form>

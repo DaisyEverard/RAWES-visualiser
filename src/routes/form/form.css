@@ -81,6 +81,7 @@ tr:nth-child(even) th textarea {
     height: 50px; 
     width: 100px; 
     font-size: x-large;
+    cursor: pointer;
 }
 #main-tab table button {
     border-radius: 50%;

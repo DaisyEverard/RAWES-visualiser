@@ -13,6 +13,20 @@ const getApiData = async (route) => {
         console.error(error); 
     }
 }
+const postNewRow = async (route, data, timestamp) => {
+    const queryUrl = base_url + route;
+    try {
+        const result = await axios.post(base_url + route, {
+            timestamp: timestamp, 
+            name: data.name,
+            serviceType: data.serviceType,
+            value: data.value
+        });
+        return result; 
+    } catch (error) {
+        console.error(error); 
+    }
+}
 
 const getTemplateList = async (type) => {
     const result = await getApiData(type);
@@ -20,5 +34,21 @@ const getTemplateList = async (type) => {
     const arrayOfRows = arrayOfObjects.map((row) => row["service_name"]);   
     return arrayOfRows; 
 }
+const getFormByTimestamp = async (timestamp) => {
+    const result = await getApiData(`formHistory/?timestamp=${timestamp}`); 
+    const unfilteredArray = result.data.rows; 
+    const filteredArray = unfilteredArray.map((row) => {
+        return {name: row.service_name, serviceType: row.service_type, value: row.value}
+    })
+    return filteredArray; 
+}
+const postNewForm = async (data) => {
+    const timestamp = data[0];
+    for (let i = 1; i < data.length; i++) {
+        postNewRow('postRow', data[i], timestamp)
+    }
+}
 
-export default getTemplateList; 
+export {getTemplateList, getFormByTimestamp, postNewForm}; 
+
+// new table - form_history (timestamp, service_type, service_name, value)

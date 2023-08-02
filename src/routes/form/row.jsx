@@ -41,7 +41,7 @@ const Row = (props) => {
 
     const getNewTD = (className, value) => {
       return   <td className={className}>
-      <input type='radio' value={value} name={title} data-name={title} data-table={tableName}/>
+      <input type='radio' value={value} name={title} data-table={tableName}/>
     </td>
     }
     
@@ -54,7 +54,7 @@ const Row = (props) => {
   {getNewTD("zero", 0)}
   {getNewTD("plus", 0.5)}
   <td className="plus-plus">
-    <input type='radio' value={1} name={title} data-name={title} data-table={tableName}/> 
+    <input type='radio' value={1} name={title} data-table={tableName}/> 
     <div>
       <button className="new-row" onClick={(e) => { newRowBefore(e)}}>+</button>
       <button className="delete-row" onClick={(e) => {removeRow(e)}}>-</button>

@@ -1,5 +1,5 @@
 import React, { useDebugValue, useEffect, useState } from "react";
-import getTemplateList from "../../utils/api";
+import {getTemplateList} from "../../utils/api";
 import Row from "./row";
 
 const Table = ({serviceType}) => {
