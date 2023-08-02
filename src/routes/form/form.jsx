@@ -8,10 +8,9 @@ import { getDataOnFormSubmit } from "../../utils/useFormData";
 const Form = () => {
         
    const getTable = (serviceType) => {
-    const tableName = serviceType.substring(0, 4).toLowerCase() + "Table"; 
     return <div>
         <h2>{serviceType} Services</h2>
-        <Table tableName={tableName} serviceType={serviceType}></Table>
+        <Table serviceType={serviceType.toLowerCase()}></Table>
     </div>
    }
 

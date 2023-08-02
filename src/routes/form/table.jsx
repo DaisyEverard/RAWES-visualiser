@@ -2,7 +2,7 @@ import React, { useDebugValue, useEffect, useState } from "react";
 import getTemplateList from "../../utils/api";
 import Row from "./row";
 
-const Table = ({tableName, serviceType}) => {
+const Table = ({serviceType}) => {
   const [list, updateList] = useState([""]);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -10,7 +10,7 @@ const Table = ({tableName, serviceType}) => {
     const fetchData = async () => {
       try {
         const newList = await Promise.all([
-          getTemplateList(serviceType.toLowerCase())
+          getTemplateList(serviceType)
         ]);
         updateList(...newList); 
       } catch (error) {
@@ -24,8 +24,8 @@ const Table = ({tableName, serviceType}) => {
 
 
   if (isLoading) return <div>Loading...</div>; 
-  
-    return <table id={tableName} data-table={tableName}>
+
+    return <table id={serviceType} data-table={serviceType}>
     <thead>
       <tr>
        <th>Service</th>
@@ -41,7 +41,7 @@ const Table = ({tableName, serviceType}) => {
      <Row
        key={item}
        title={item}
-       tableName={tableName}
+       tableName={serviceType}
        list={list}
        updateList={updateList} 
      />
