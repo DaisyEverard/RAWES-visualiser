@@ -8,16 +8,16 @@ const getApiData = async (route) => {
     const queryUrl = base_url + route;
     console.log(queryUrl); 
     try {
-        const result = await axios.get(base_url + route);
+        const result = await axios.get(queryUrl);
         return result; 
     } catch (error) {
         console.error(error); 
     }
 }
-const postNewRow = async (route, data, timestamp) => {
-    const queryUrl = base_url + route;
+const postNewRow = async (data, timestamp) => {
+    const queryUrl = base_url + 'postRow';
     try {
-        const result = await axios.post(base_url + route, {
+        const result = await axios.post(queryUrl, {
             timestamp: timestamp, 
             name: data.name,
             serviceType: data.serviceType,
@@ -26,6 +26,12 @@ const postNewRow = async (route, data, timestamp) => {
         return result; 
     } catch (error) {
         console.error(error); 
+    }
+}
+const postNewForm = async (data) => {
+    const timestamp = data[0];
+    for (let i = 1; i < data.length; i++) {
+        postNewRow(data[i], timestamp)
     }
 }
 
@@ -43,12 +49,6 @@ const getFormByTimestamp = async (timestamp) => {
         return {name: row.service_name, serviceType: row.service_type, value: row.value}
     })
     return filteredArray; 
-}
-const postNewForm = async (data) => {
-    const timestamp = data[0];
-    for (let i = 1; i < data.length; i++) {
-        postNewRow('postRow', data[i], timestamp)
-    }
 }
 const removeForm = async (timestamp) => {
     try {

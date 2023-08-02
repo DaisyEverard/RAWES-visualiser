@@ -51,7 +51,6 @@ To fill out the form:
 - When you remove all rows in a service, no way to add back again
 - map doesn't work for empty titles as same
 - incomplete form doesn't persist if tabs switched
-- delete entries from database (by timestamp?)
 - track changes over time
 - Split data based on scale (e.g. local, regional, global)
 - Research whether services with 0 value are included in calculations or omitted
