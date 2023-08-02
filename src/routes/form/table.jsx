@@ -9,10 +9,8 @@ const Table = ({serviceType}) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const newList = await Promise.all([
-          getTemplateList(serviceType)
-        ]);
-        updateList(...newList); 
+        const newList = await getTemplateList(serviceType);
+        updateList(newList); 
       } catch (error) {
         console.error('Error fetching data:', error);
       } finally {

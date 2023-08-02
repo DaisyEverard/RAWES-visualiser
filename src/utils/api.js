@@ -14,6 +14,28 @@ const getApiData = async (route) => {
         console.error(error); 
     }
 }
+const getAllTimestamps = async () => {
+    const route = 'getTimestamps';
+    const result = await getApiData(route);
+    const arrayOfRows = result.data.rows;
+    const arrayOfTimestamps = arrayOfRows.map((row) => row.timestamp);   
+    return arrayOfTimestamps; 
+}
+const getTemplateList = async (type) => {
+    const route = 'getTemplate/' + type; 
+    const result = await getApiData(route);
+    const arrayOfRows = result.data.rows;
+    const arrayOfServices = arrayOfRows.map((row) => row["service_name"]);   
+    return arrayOfServices; 
+}
+const getFormByTimestamp = async (timestamp) => {
+    const result = await getApiData(`formHistory/?timestamp=${timestamp}`); 
+    const unfilteredArray = result.data.rows; 
+    const filteredArray = unfilteredArray.map((row) => {
+        return {name: row.service_name, serviceType: row.service_type, value: row.value}
+    })
+    return filteredArray; 
+}
 const postNewRow = async (data, timestamp) => {
     const queryUrl = base_url + 'postRow';
     try {
@@ -34,22 +56,6 @@ const postNewForm = async (data) => {
         postNewRow(data[i], timestamp)
     }
 }
-
-const getTemplateList = async (type) => {
-    const route = 'getTable/' + type; 
-    const result = await getApiData(route);
-    const arrayOfObjects = result.data.rows;
-    const arrayOfRows = arrayOfObjects.map((row) => row["service_name"]);   
-    return arrayOfRows; 
-}
-const getFormByTimestamp = async (timestamp) => {
-    const result = await getApiData(`formHistory/?timestamp=${timestamp}`); 
-    const unfilteredArray = result.data.rows; 
-    const filteredArray = unfilteredArray.map((row) => {
-        return {name: row.service_name, serviceType: row.service_type, value: row.value}
-    })
-    return filteredArray; 
-}
 const removeForm = async (timestamp) => {
     try {
         const result = await axios.post(base_url + 'removeForm', {
@@ -62,4 +68,8 @@ const removeForm = async (timestamp) => {
 }
 
 
-export {getTemplateList, getFormByTimestamp, postNewForm, removeForm}; 
+export {getTemplateList,
+     getFormByTimestamp,
+     postNewForm,
+     removeForm,
+     getAllTimestamps}; 
