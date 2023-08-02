@@ -6,6 +6,7 @@ const base_url = "http://localhost:3000/"
 
 const getApiData = async (route) => {
     const queryUrl = base_url + route;
+    console.log(queryUrl); 
     try {
         const result = await axios.get(base_url + route);
         return result; 
@@ -29,7 +30,8 @@ const postNewRow = async (route, data, timestamp) => {
 }
 
 const getTemplateList = async (type) => {
-    const result = await getApiData(type);
+    const route = 'getTable/' + type; 
+    const result = await getApiData(route);
     const arrayOfObjects = result.data.rows;
     const arrayOfRows = arrayOfObjects.map((row) => row["service_name"]);   
     return arrayOfRows; 
