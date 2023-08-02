@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useDebugValue, useEffect, useState } from "react";
 import Row from "./row";
 
 const Table = ({list, tableName, updateList}) => {
@@ -14,7 +14,7 @@ const Table = ({list, tableName, updateList}) => {
        <th>++</th>
      </tr>
     </thead>
-    <tbody>
+    <tbody>     
            {list.map((item) => (
      <Row
        key={item}

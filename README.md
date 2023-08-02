@@ -49,6 +49,8 @@ To fill out the form:
 ## Future Development Options
 
 - When you remove all rows in a service, no way to add back again
+- map doesn't work for empty titles as same
+- form doesn't persist if tabs switched
 - remove data box and use timestamp instead
 - track changes over time
 - Split data based on scale (e.g. local, regional, global)
