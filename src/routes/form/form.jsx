@@ -2,10 +2,9 @@ import React from "react";
 import "./form.css"
 import Table from "./Table";
 import { getDataOnFormSubmit } from "../../utils/useFormData";
-import { postNewForm } from "../../utils/api";
+import { postNewForm, removeForm } from "../../utils/api";
 
 const Form = () => {
-        
    const getTable = (serviceType) => {
     return <div>
         <h2>{serviceType} Services</h2>

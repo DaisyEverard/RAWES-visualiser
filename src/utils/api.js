@@ -48,7 +48,15 @@ const postNewForm = async (data) => {
         postNewRow('postRow', data[i], timestamp)
     }
 }
+const removeForm = async (timestamp) => {
+    try {
+        const result = await axios.post(base_url + 'removeForm', {
+            timestamp: timestamp
+        });
+        return result; 
+    } catch (error) {
+        console.error(error); 
+    }
+}
 
-export {getTemplateList, getFormByTimestamp, postNewForm}; 
-
-// new table - form_history (timestamp, service_type, service_name, value)
+export {getTemplateList, getFormByTimestamp, postNewForm, removeForm}; 
