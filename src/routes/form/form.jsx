@@ -3,6 +3,9 @@ import { useState } from "react";
 import "./form.css"
 import Table from "./Table";
 import getTemplateList from "../../utils/api";
+import { addDataToLocalStorage, getDataOnFormSubmit, getTimestampFromLocalStorage } from "../../utils/useFormData";
+
+getTimestampFromLocalStorage(1690973556056);
 
 const Form = () => {
     const [provList, setProvList] = useState([" "]); 
@@ -55,11 +58,10 @@ const Form = () => {
         {getTable(suppList, setSuppList, "Supporting")} 
 
         <div className="flex-row">
-            <label htmlFor="form-date">Date:</label>
-            <input id="form-date" type="input" placeholder="MM/YYYY"/>
-        </div>
-        <div className="flex-row">
-            <button id="submit-button" type="submit">Submit</button>
+            <button id="submit-button" type="submit" onClick={(e) => {
+              const newForm = getDataOnFormSubmit(e);
+              addDataToLocalStorage(newForm); 
+            }}>Submit</button>
         </div>
     </form>
 </div>
