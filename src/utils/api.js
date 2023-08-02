@@ -59,4 +59,5 @@ const removeForm = async (timestamp) => {
     }
 }
 
+
 export {getTemplateList, getFormByTimestamp, postNewForm, removeForm}; 
