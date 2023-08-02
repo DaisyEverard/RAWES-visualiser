@@ -38,23 +38,21 @@ const Row = (props) => {
       newList[titleIndex] = newTitle
       updateList(newList)
     }
+
+    const getNewTD = (className, value) => {
+      return   <td className={className}>
+      <input type='radio' value={value} name={title} data-name={title} data-table={tableName}/>
+    </td>
+    }
     
     return <tr>
   <th>
     <textarea defaultValue={title} onChange={(e) => { handleTitleChange(e) }}></textarea>
   </th>
-  <td className="minus-minus">
-    <input type='radio' value={-1} name={title} data-name={title} data-table={tableName}/>
-  </td>
-  <td className="minus">
-    <input type='radio' value={-0.5} name={title} data-name={title} data-table={tableName}/>
-  </td>
-  <td className="zero">
-    <input type='radio' value={0} name={title} data-name={title} data-table={tableName}/>
-  </td>
-  <td className="plus">
-    <input type='radio' value={0.5} name={title} data-name={title} data-table={tableName}/>
-  </td>
+  {getNewTD("minus-minus", -1)}
+  {getNewTD("minus", -0.5)}
+  {getNewTD("zero", 0)}
+  {getNewTD("plus", 0.5)}
   <td className="plus-plus">
     <input type='radio' value={1} name={title} data-name={title} data-table={tableName}/> 
     <div>
