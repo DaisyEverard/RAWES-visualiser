@@ -15,9 +15,11 @@ const getApiData = async (route) => {
 }
 
 const getTemplateList = async (type) => {
-    const result = await getApiData(type);  
-    // console.log(result.data.services);  
-    return result.data["services"]; 
+    const result = await getApiData(type);
+    const arrayOfObjects = result.data.rows;
+    const arrayOfRows = arrayOfObjects.map((row) => row["service_name"]);   
+    console.log(arrayOfRows); 
+    return arrayOfRows; 
 }
 
 export default getTemplateList; 
