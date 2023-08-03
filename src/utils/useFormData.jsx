@@ -17,7 +17,13 @@ const handleFormSubmit = (e) => {
 
   const metadata = {}
   const timestamp = Date.now();
+  const location = document.querySelector("#location-input").value;
+  document.querySelector("#location-input").value = ""; 
+  const assessor = document.querySelector("#assessor-input").value;
+  document.querySelector("#assessor-input").value = ""; 
   metadata.timestamp = timestamp;
+  metadata.location = location;
+  metadata.assessor = assessor;
 
   postNewForm(formArray, metadata); 
 };

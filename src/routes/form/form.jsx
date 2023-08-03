@@ -19,6 +19,14 @@ const Form = () => {
         {getTable("Supporting")} 
 
         <div className="flex-row">
+            <label htmlFor="#location-input">Location:</label>
+            <input id="location-input" type="text" name="location-input" placeholder="순천만"></input>
+        </div>
+        <div className="flex-row">
+            <label htmlFor="#assessor-input">Assessor Name:</label>
+            <input id="assessor-input" type="text" name="assessor-input" placeholder="John Smith"></input>
+        </div>
+        <div className="flex-row">
             <button id="submit-button" type="submit" onClick={(e) => {
               handleFormSubmit(e); 
             }}>Submit</button>

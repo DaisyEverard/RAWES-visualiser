@@ -61,8 +61,8 @@ const postNewForm = async (data, metadata) => {
     try {
         const result = await axios.post(queryUrl, {
             timestamp: metadata.timestamp, 
-            assessor: 'testassess',
-            location: 'testlocation'
+            assessor: metadata.assessor,
+            location: metadata.location
         });
         return result; 
     } catch (error) {
