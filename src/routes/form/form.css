@@ -92,6 +92,3 @@ tr:nth-child(even) th textarea {
  #new-row-bttn {
      background-color: green;
  }
- .delete-row {
-     background-color: red;
- }

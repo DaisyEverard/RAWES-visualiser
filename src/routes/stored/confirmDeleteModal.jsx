@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import {removeAllForms} from "../../utils/api.js"; 
 
 const ConfirmDeleteModal = ({show, handleClose}) => {
 
@@ -13,6 +14,7 @@ const ConfirmDeleteModal = ({show, handleClose}) => {
             </button>
             <button className="delete-bttn" onClick={() => {
                 // send delete to api
+                removeAllForms(); 
                 handleClose(); 
             }}>Delete</button>
         </div>

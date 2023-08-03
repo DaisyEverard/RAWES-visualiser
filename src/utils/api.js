@@ -71,10 +71,20 @@ const postNewForm = async (data, metadata) => {
 }
 const removeForm = async (timestamp) => {
     try {
+        // should be a delete
         const result = await axios.post(base_url + 'removeForm', {
             timestamp: timestamp
         });
         return result; 
+    } catch (error) {
+        console.error(error); 
+    }
+}
+const removeAllForms = async () => {
+    try {
+        // should be a delete
+        const result = await axios.post(base_url + 'removeAllForms')
+        return result;
     } catch (error) {
         console.error(error); 
     }
@@ -85,4 +95,5 @@ export {getTemplateList,
      getFormByTimestamp,
      postNewForm,
      removeForm,
-     getAllMetadata}; 
+     getAllMetadata,
+    removeAllForms }; 

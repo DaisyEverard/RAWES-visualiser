@@ -28,6 +28,7 @@ const Stored = () => {
             setShowModal('flex')
         } else {
             setShowModal('none')
+            setMetadata([]) 
         }
     }
 
