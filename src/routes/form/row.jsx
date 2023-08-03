@@ -56,8 +56,8 @@ const Row = (props) => {
   <td className="plus-plus">
     <input type='radio' value={1} name={title} data-table={tableName}/> 
     <div>
-      <button className="new-row" onClick={(e) => { newRowBefore(e)}}>+</button>
-      <button className="delete-row" onClick={(e) => {removeRow(e)}}>-</button>
+      <button id="new-row-bttn" onClick={(e) => { newRowBefore(e)}}>+</button>
+      <button id="delete-row-bttn"  className="delete-bttn" onClick={(e) => {removeRow(e)}}>-</button>
     </div>
   </td>
   </tr>

@@ -15,3 +15,17 @@
   justify-content: center;
   align-items: center;
 }
+.flex-col {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.delete-bttn {
+  background-color: red;
+  color: white; 
+  border: none;
+  border-radius: 3px;
+  padding: 3px 10px; 
+}

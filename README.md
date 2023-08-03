@@ -52,6 +52,7 @@ To fill out the form:
 - map doesn't work for empty titles as same
 - incomplete form doesn't persist if tabs switched
 - have a generic post/get function in frontend
+- clear all from db function
 - track changes over time
 - Split data based on scale (e.g. local, regional, global)
 - Research whether services with 0 value are included in calculations or omitted

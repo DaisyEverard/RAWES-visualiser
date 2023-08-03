@@ -89,7 +89,7 @@ tr:nth-child(even) th textarea {
     width: 45%; 
  
  }
- .new-row {
+ #new-row-bttn {
      background-color: green;
  }
  .delete-row {

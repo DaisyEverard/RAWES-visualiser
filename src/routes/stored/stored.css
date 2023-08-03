@@ -1,0 +1,11 @@
+#confirm-delete-modal {
+    position: absolute;
+    top: 10%;
+    left: 10%;
+    width: 80%;
+    height: 80%; 
+    background-color: black;
+    border: 2px solid red;
+    border-radius: 10px;
+    color: white;
+}
