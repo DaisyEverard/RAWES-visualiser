@@ -14,12 +14,15 @@ const getApiData = async (route) => {
         console.error(error); 
     }
 }
-const getAllTimestamps = async () => {
-    const route = 'getTimestamps';
+const getAllMetadata = async () => {
+    const route = 'getMetadata';
     const result = await getApiData(route);
-    const arrayOfRows = result.data.rows;
-    const arrayOfTimestamps = arrayOfRows.map((row) => row.timestamp);   
-    return arrayOfTimestamps; 
+    const arrayOfRows = result.data.rows; 
+    const unfilteredArray = result.data.rows; 
+    const filteredArray = unfilteredArray.map((row) => {
+        return {timestamp: row.timestamp, assessor: row.assessor, location: row.location}; 
+    })
+    return filteredArray; 
 }
 const getTemplateList = async (type) => {
     const route = 'getTemplate/' + type; 
@@ -43,17 +46,27 @@ const postNewRow = async (data, timestamp) => {
             timestamp: timestamp, 
             name: data.name,
             serviceType: data.serviceType,
-            value: data.value
+            value: data.value,
         });
         return result; 
     } catch (error) {
         console.error(error); 
     }
 }
-const postNewForm = async (data) => {
-    const timestamp = data[0];
+const postNewForm = async (data, metadata) => {
     for (let i = 1; i < data.length; i++) {
-        postNewRow(data[i], timestamp)
+        postNewRow(data[i], metadata.timestamp); 
+    }
+    const queryUrl = base_url + 'postMetadata';
+    try {
+        const result = await axios.post(queryUrl, {
+            timestamp: metadata.timestamp, 
+            assessor: 'testassess',
+            location: 'testlocation'
+        });
+        return result; 
+    } catch (error) {
+        console.error(error); 
     }
 }
 const removeForm = async (timestamp) => {
@@ -72,4 +85,4 @@ export {getTemplateList,
      getFormByTimestamp,
      postNewForm,
      removeForm,
-     getAllTimestamps}; 
+     getAllMetadata}; 

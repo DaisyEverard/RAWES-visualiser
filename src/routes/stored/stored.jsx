@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from "react";
-import { getAllTimestamps, getTemplateList } from "../../utils/api";
+import { getAllMetadata } from "../../utils/api";
 
 const Stored = () => {
-    const [timestamps, setTimestamps] = useState([]); 
+    const [metadata, setMetadata] = useState([]); 
     const [isLoading, setIsLoading] = useState(true); 
 
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const result = await getAllTimestamps();
+                const result = await getAllMetadata();
                 console.log(result); 
-                setTimestamps(result); 
+                setMetadata(result); 
             } catch (error) {
                 console.error('Error fetching data:', error);
               } finally {
@@ -20,16 +20,21 @@ const Stored = () => {
             fetchData()
           }, []);
 
-    const renderButton = (timestamp) => {
-        const unix = parseInt(timestamp); 
+    const renderButton = (form) => {
+        const unix = parseInt(form.timestamp); 
         const readableDate = new Date(unix).toISOString().substring(0,10); 
-        return <button>{readableDate}</button>
+        return <button 
+        data-timestamp={form.timestamp}>
+            <p>{form.location}</p>
+            <p>{readableDate}</p>
+            <p>{form.assessor}</p>
+        </button>
     }
 
     return <div>
         <h1>Buttons for Stored data</h1>
-        {timestamps.map(stamp => {
-            return renderButton(stamp); 
+        {metadata.map(form => {
+            return renderButton(form); 
         })}
     </div>   
 }

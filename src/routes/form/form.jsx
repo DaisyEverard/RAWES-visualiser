@@ -1,8 +1,7 @@
 import React from "react";
 import "./form.css"
 import Table from "./Table";
-import { getDataOnFormSubmit } from "../../utils/useFormData";
-import { postNewForm, removeForm } from "../../utils/api";
+import { handleFormSubmit } from "../../utils/useFormData";
 
 const Form = () => {
    const getTable = (serviceType) => {
@@ -21,8 +20,7 @@ const Form = () => {
 
         <div className="flex-row">
             <button id="submit-button" type="submit" onClick={(e) => {
-              const data = getDataOnFormSubmit(e); 
-              postNewForm(data); 
+              handleFormSubmit(e); 
             }}>Submit</button>
         </div>
     </form>
