@@ -1,23 +1,21 @@
 import React, { useEffect, useState } from "react";
-import { getAllMetadata } from "../../utils/api";
+import Chart from "../../../D3Graphs/chart";
+import { getAllMetadata, getFormByTimestamp, removeFormByTimestamp } from "../../utils/api";
 import ConfirmDeleteModal from "./confirmDeleteModal";
 import './stored.css';
 
 const Stored = () => {
     const [metadata, setMetadata] = useState([]); 
-    const [isLoading, setIsLoading] = useState(true); 
     const [showModal, setShowModal] = useState('none'); 
+    const [currentForm, setCurrentForm] = useState([]); 
 
     useEffect(() => {
         const fetchData = async () => {
             try {
                 const result = await getAllMetadata();
-                console.log(result); 
                 setMetadata(result); 
             } catch (error) {
                 console.error('Error fetching data:', error);
-              } finally {
-                setIsLoading(false); 
               }
             };
             fetchData()
@@ -32,12 +30,20 @@ const Stored = () => {
         }
     }
 
+    const handleFormClick = async (e) => {
+        e.preventDefault(); 
+        const timestamp = e.currentTarget.getAttribute("data-timestamp");
+        const data = await getFormByTimestamp(timestamp);
+        setCurrentForm(data); 
+    } 
+
     const getFormButton = (form) => {
         const unix = parseInt(form.timestamp); 
         const readableDate = new Date(unix).toISOString().substring(0,10); 
         return <button 
         data-timestamp={form.timestamp}
-        key={form.timestamp}>
+        key={form.timestamp}
+        onClick={(e) => {handleFormClick(e)}}>
             <p>{form.location}</p>
             <p>{readableDate}</p>
             <p>{form.assessor}</p>
@@ -55,6 +61,9 @@ const Stored = () => {
             <p>DATA</p>
         </button>
         <ConfirmDeleteModal show={showModal} handleClose={toggleModal}/>
+        <div>
+            <Chart currentForm={currentForm}></Chart>
+        </div>
     </div>   
 }
 

@@ -17,9 +17,11 @@ const handleFormSubmit = (e) => {
 
   const metadata = {}
   const timestamp = Date.now();
-  const location = document.querySelector("#location-input").value;
+  let location = document.querySelector("#location-input").value;
+  if (!location) {location = "location"}; 
   document.querySelector("#location-input").value = ""; 
-  const assessor = document.querySelector("#assessor-input").value;
+  let assessor = document.querySelector("#assessor-input").value;
+  if (!assessor) {assessor = "assessor"}; 
   document.querySelector("#assessor-input").value = ""; 
   metadata.timestamp = timestamp;
   metadata.location = location;

@@ -4,9 +4,9 @@ import axios from "axios";
 // for java 8080
 const base_url = "http://localhost:3000/"
 
+// GET
 const getApiData = async (route) => {
     const queryUrl = base_url + route;
-    console.log(queryUrl); 
     try {
         const result = await axios.get(queryUrl);
         return result; 
@@ -32,46 +32,50 @@ const getTemplateList = async (type) => {
     return arrayOfServices; 
 }
 const getFormByTimestamp = async (timestamp) => {
-    const result = await getApiData(`formHistory/?timestamp=${timestamp}`); 
+    const route = `formHistory/?timestamp=${timestamp}`;
+    const result = await getApiData(route); 
     const unfilteredArray = result.data.rows; 
     const filteredArray = unfilteredArray.map((row) => {
         return {name: row.service_name, serviceType: row.service_type, value: row.value}
     })
     return filteredArray; 
 }
-const postNewRow = async (data, timestamp) => {
-    const queryUrl = base_url + 'postRow';
+// POST
+const postToApi = async (route, body) => {
     try {
-        const result = await axios.post(queryUrl, {
-            timestamp: timestamp, 
-            name: data.name,
-            serviceType: data.serviceType,
-            value: data.value,
-        });
+        const result = await axios.post(route, body);
         return result; 
     } catch (error) {
         console.error(error); 
     }
 }
+const postNewRow = async (data, timestamp) => {
+    const queryUrl = base_url + 'postRow';
+    const body = {
+        timestamp: timestamp, 
+        name: data.name,
+        serviceType: data.serviceType,
+        value: data.value,
+    }
+    const result = await postToApi(queryUrl, body)
+   return result; 
+}
 const postNewForm = async (data, metadata) => {
-    for (let i = 1; i < data.length; i++) {
+    for (let i = 0; i < data.length; i++) {
         postNewRow(data[i], metadata.timestamp); 
     }
     const queryUrl = base_url + 'postMetadata';
-    try {
-        const result = await axios.post(queryUrl, {
-            timestamp: metadata.timestamp, 
-            assessor: metadata.assessor,
-            location: metadata.location
-        });
-        return result; 
-    } catch (error) {
-        console.error(error); 
+    const body = {
+        timestamp: metadata.timestamp, 
+        assessor: metadata.assessor,
+        location: metadata.location
     }
+    const result = await postToApi(queryUrl, body);
+    return result; 
 }
-const removeForm = async (timestamp) => {
+// DELETE
+const removeFormByTimestamp = async (timestamp) => {
     try {
-        // should be a delete
         const result = await axios.post(base_url + 'removeForm', {
             timestamp: timestamp
         });
@@ -82,7 +86,6 @@ const removeForm = async (timestamp) => {
 }
 const removeAllForms = async () => {
     try {
-        // should be a delete
         const result = await axios.post(base_url + 'removeAllForms')
         return result;
     } catch (error) {
@@ -94,6 +97,6 @@ const removeAllForms = async () => {
 export {getTemplateList,
      getFormByTimestamp,
      postNewForm,
-     removeForm,
+     removeFormByTimestamp,
      getAllMetadata,
     removeAllForms }; 
