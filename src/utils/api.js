@@ -43,7 +43,7 @@ const getFormByTimestamp = async (timestamp) => {
 // POST
 const postToApi = async (route, body) => {
     try {
-        const result = await axios.post(route, body);
+        const result = await axios.put(route, body);
         return result; 
     } catch (error) {
         console.error(error); 
