@@ -50,7 +50,7 @@ const Stored = () => {
     }
 
     return <div id="stored-page">
-        <h1>Buttons for Stored data</h1>
+        <h1>Stored Forms</h1>
         {metadata.map(form => {
             return getFormButton(form); 
         })}

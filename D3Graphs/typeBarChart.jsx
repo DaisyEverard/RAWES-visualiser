@@ -8,15 +8,17 @@ import React, { useEffect, useState } from 'react';
         const valueObj =  {provisioning: 0, cultural: 0, regulating: 0, supporting: 0}
         form.forEach(service => {
             const type = service.serviceType; 
-            const value = parseInt(service.value);
+            const value = parseFloat(service.value);
             valueObj[type] += value; 
         })
-        setFilteredData([
+        const updatedData = [
             {name: "provisioning", value: valueObj.provisioning},
             {name: "cultural", value: valueObj.cultural},
             {name: "regulating", value: valueObj.regulating},
             {name: "supporting", value: valueObj.supporting}
-        ]); 
+        ]
+        setFilteredData(updatedData); 
+        console.log(updatedData)
     }
 
     // change current data
@@ -30,7 +32,7 @@ import React, { useEffect, useState } from 'react';
     const margin = {
         top: 10,
         right: 10,
-        bottom: 20,
+        bottom: 50,
         left: 40,
       };
       const tableWidth = width - margin.left - margin.right;
@@ -42,10 +44,14 @@ import React, { useEffect, useState } from 'react';
     .domain(filteredData.map(d => d.name))
     .range([0, tableWidth])
     .padding(0.26);
-    const yScale = scaleLinear()
-      .domain([0, Math.max(...filteredData.map(d => d.value))])
-      .range([tableHeight, 0])
-      .nice();
+
+const values = filteredData.map(d => d.value);
+const maxValue = Math.max(...values);
+const minValue = Math.min(0, ...values);
+const yScale = scaleLinear()
+    .domain([minValue, maxValue])
+    .range([tableHeight, 0])
+    .nice();
 
     return (
         <svg width={width} height={height}>
@@ -55,13 +61,13 @@ import React, { useEffect, useState } from 'react';
                     <rect
                         className={`bar ${d.name}-bar`}
                         x={xScale(d.name)}
-                        y={yScale(d.value)}
+                        y={d.value >= 0 ? yScale(d.value) : yScale(0)}
                         width={xScale.bandwidth()}
-                        height={tableHeight - yScale(d.value)}
+                        height={Math.abs(yScale(d.value) - yScale(0))}
                     />
                     <text
                     x={xScale(d.name) + xScale.bandwidth() / 2}
-                    y={yScale(d.value) - labelOffsetY}
+                    y={d.value >= 0 ? yScale(d.value) - labelOffsetY : yScale(d.value) + labelOffsetY}
                     textAnchor="middle"
                     dy="0.35em"
                     fontSize="12px"
@@ -71,6 +77,21 @@ import React, { useEffect, useState } from 'react';
                 </text>
                 </g>
                 ))}
+                 <g className="y-axis">
+                    {filteredData.map((d) => (
+                        <g key={d.name} transform={`translate(0, ${yScale(d.value)})`}>
+                            <text
+                                x={-labelOffsetY}
+                                dy="0.35em"
+                                fontSize="12px"
+                                fill="black"
+                                textAnchor="end"
+                            >
+                                {d.value}
+                            </text>
+                        </g>
+                    ))}
+                </g>
             </g>
         </svg>
     );
