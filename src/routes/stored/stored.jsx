@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Chart from "../../../D3Graphs/chart";
-import { getAllMetadata, getFormByTimestamp, removeFormByTimestamp } from "../../utils/api";
+import { getAllMetadata, getFormByTimestamp, deleteFormByTimestamp } from "../../utils/api";
 import ConfirmDeleteModal from "./confirmDeleteModal";
 import './stored.css';
 

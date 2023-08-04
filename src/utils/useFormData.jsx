@@ -1,5 +1,5 @@
 import React from "react";
-import { postNewForm } from "./api";
+import { putNewForm } from "./api";
 
 const handleFormSubmit = (e) => {
   e.preventDefault();
@@ -27,7 +27,7 @@ const handleFormSubmit = (e) => {
   metadata.location = location;
   metadata.assessor = assessor;
 
-  postNewForm(formArray, metadata); 
+  putNewForm(formArray, metadata); 
 };
 
 export {handleFormSubmit};  

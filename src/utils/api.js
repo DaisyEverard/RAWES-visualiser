@@ -32,7 +32,7 @@ const getTemplateList = async (type) => {
     return arrayOfServices; 
 }
 const getFormByTimestamp = async (timestamp) => {
-    const route = `formHistory/?timestamp=${timestamp}`;
+    const route = `getFormHistory/?timestamp=${timestamp}`;
     const result = await getApiData(route); 
     const unfilteredArray = result.data.rows; 
     const filteredArray = unfilteredArray.map((row) => {
@@ -40,8 +40,8 @@ const getFormByTimestamp = async (timestamp) => {
     })
     return filteredArray; 
 }
-// POST
-const postToApi = async (route, body) => {
+// PUT
+const putToApi = async (route, body) => {
     try {
         const result = await axios.put(route, body);
         return result; 
@@ -49,34 +49,34 @@ const postToApi = async (route, body) => {
         console.error(error); 
     }
 }
-const postNewRow = async (data, timestamp) => {
-    const queryUrl = base_url + 'postRow';
+const putNewRow = async (data, timestamp) => {
+    const queryUrl = base_url + 'putRow';
     const body = {
         timestamp: timestamp, 
         name: data.name,
         serviceType: data.serviceType,
         value: data.value,
     }
-    const result = await postToApi(queryUrl, body)
+    const result = await putToApi(queryUrl, body)
    return result; 
 }
-const postNewForm = async (data, metadata) => {
+const putNewForm = async (data, metadata) => {
     for (let i = 0; i < data.length; i++) {
-        postNewRow(data[i], metadata.timestamp); 
+        putNewRow(data[i], metadata.timestamp); 
     }
-    const queryUrl = base_url + 'postMetadata';
+    const queryUrl = base_url + 'putMetadata';
     const body = {
         timestamp: metadata.timestamp, 
         assessor: metadata.assessor,
         location: metadata.location
     }
-    const result = await postToApi(queryUrl, body);
+    const result = await putToApi(queryUrl, body);
     return result; 
 }
 // DELETE
-const removeFormByTimestamp = async (timestamp) => {
+const deleteFormByTimestamp = async (timestamp) => {
     try {
-        const result = await axios.delete(base_url + 'removeForm', {
+        const result = await axios.delete(base_url + 'deleteForm', {
             timestamp: timestamp
         });
         return result; 
@@ -84,9 +84,9 @@ const removeFormByTimestamp = async (timestamp) => {
         console.error(error); 
     }
 }
-const removeAllForms = async () => {
+const deleteAllForms = async () => {
     try {
-        const result = await axios.delete(base_url + 'removeAllForms')
+        const result = await axios.delete(base_url + 'deleteAllForms')
         return result;
     } catch (error) {
         console.error(error); 
@@ -96,7 +96,7 @@ const removeAllForms = async () => {
 
 export {getTemplateList,
      getFormByTimestamp,
-     postNewForm,
-     removeFormByTimestamp,
+     putNewForm,
+     deleteFormByTimestamp,
      getAllMetadata,
-    removeAllForms }; 
+    deleteAllForms }; 
