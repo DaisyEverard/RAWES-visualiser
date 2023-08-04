@@ -1,10 +1,6 @@
 import { scaleBand, scaleLinear } from 'd3';
 import React, { useEffect, useState } from 'react';
 
-// expected props: ...{ xScale, yScale,data,height, t,}
-// expected data: [{ name: 'Sun', value: 100 },...]
-// my data: [{"name": "","serviceType": "","value": "-1.0"},...]
-
  const TypeBarChart = ({formObject}) => {
     const [filteredData, setFilteredData] = useState([]); 
  
@@ -30,7 +26,7 @@ import React, { useEffect, useState } from 'react';
 
     // width and height init
     const width = 500; 
-    const height = width * 0.5; 
+    const height = width * 0.4; 
     const margin = {
         top: 10,
         right: 10,
@@ -53,7 +49,7 @@ import React, { useEffect, useState } from 'react';
 
     return (
         <svg width={width} height={height}>
-            <g transform={`translate(${margin.left}, ${margin.right})`} style={{paddingTop: '100px'}}>
+            <g transform={`translate(${margin.left}, ${margin.top + 20})`}>
             {filteredData.map(d => (
                 <g key={d.name}>
                     <rect
