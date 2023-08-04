@@ -53,3 +53,4 @@ const getBars = () => {
 }
 
 export default Chart; 
+// doesn't handle negative numbers

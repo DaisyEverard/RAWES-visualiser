@@ -76,7 +76,7 @@ const postNewForm = async (data, metadata) => {
 // DELETE
 const removeFormByTimestamp = async (timestamp) => {
     try {
-        const result = await axios.post(base_url + 'removeForm', {
+        const result = await axios.delete(base_url + 'removeForm', {
             timestamp: timestamp
         });
         return result; 
@@ -86,7 +86,7 @@ const removeFormByTimestamp = async (timestamp) => {
 }
 const removeAllForms = async () => {
     try {
-        const result = await axios.post(base_url + 'removeAllForms')
+        const result = await axios.delete(base_url + 'removeAllForms')
         return result;
     } catch (error) {
         console.error(error); 
