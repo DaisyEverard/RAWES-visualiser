@@ -1,60 +1,83 @@
-import React, { useEffect } from 'react';
-import { select, event } from 'd3-selection';
-import { transition } from 'd3-transition';
+import { scaleBand, scaleLinear } from 'd3';
+import React, { useEffect, useState } from 'react';
 
 // expected props: ...{ xScale, yScale,data,height, t,}
 // expected data: [{ name: 'Sun', value: 100 },...]
+// my data: [{"name": "","serviceType": "","value": "-1.0"},...]
 
- const typeBarChart = ({formObject}) => {
- const ref = React.createRef();
+ const TypeBarChart = ({formObject}) => {
+    const [filteredData, setFilteredData] = useState([]); 
+ 
+    const filterData = (form) => {
+        const valueObj =  {provisioning: 0, cultural: 0, regulating: 0, supporting: 0}
+        form.forEach(service => {
+            const type = service.serviceType; 
+            const value = parseInt(service.value);
+            valueObj[type] += value; 
+        })
+        setFilteredData([
+            {name: "provisioning", value: valueObj.provisioning},
+            {name: "cultural", value: valueObj.cultural},
+            {name: "regulating", value: valueObj.regulating},
+            {name: "supporting", value: valueObj.supporting}
+        ]); 
+    }
 
- useEffect(() => {init()}, [])
- useEffect(() => {barTransition()}, []) // update
-  
- const barTransition = () => {
-    const node = ref.current;
-    const { yScale, height, data } = props;
+    // change current data
+    useEffect(() => {
+        filterData(formObject);
+    }, [formObject])
 
-    select(node)
-      .selectAll('.bar')
-      .data(data)
-      .attr('y', d => yScale(d.value))
-      .attr('height', d => height - yScale(d.value));
-  }
-  const init = () => {
-    const {
-      xScale, yScale, data, height,
-    } = props;
-    const node = ref.current;
+    // width and height init
+    const width = 500; 
+    const height = width * 0.5; 
+    const margin = {
+        top: 10,
+        right: 10,
+        bottom: 20,
+        left: 40,
+      };
+      const tableWidth = width - margin.left - margin.right;
+      const tableHeight = height - margin.top - margin.bottom;
+      const labelOffsetY = 15; 
 
-    // prepare initial data from where transition starts.
-    const initialData = data.map(obj => ({
-      name: obj.name,
-      value: 0
-    }));
+    //   xScale and uScale init
+    const xScale = scaleBand()
+    .domain(filteredData.map(d => d.name))
+    .range([0, tableWidth])
+    .padding(0.26);
+    const yScale = scaleLinear()
+      .domain([0, Math.max(...filteredData.map(d => d.value))])
+      .range([tableHeight, 0])
+      .nice();
 
-    // prepare the field
-    const bar = select(node)
-      .selectAll('.bar')
-      .data(initialData);
-
-    // add rect to svg
-    bar
-      .enter()
-      .append('rect')
-      .attr('class', 'bar')
-      .attr('x', d => xScale(d.name))
-      .attr('y', height)
-      .attr('width', xScale.bandwidth())
-
-    barTransition();
-  }
     return (
-      <g
-        className="bar-group"
-        ref={ref}
-      />
+        <svg width={width} height={height}>
+            <g transform={`translate(${margin.left}, ${margin.right})`} style={{paddingTop: '100px'}}>
+            {filteredData.map(d => (
+                <g key={d.name}>
+                    <rect
+                        className={`bar ${d.name}-bar`}
+                        x={xScale(d.name)}
+                        y={yScale(d.value)}
+                        width={xScale.bandwidth()}
+                        height={tableHeight - yScale(d.value)}
+                    />
+                    <text
+                    x={xScale(d.name) + xScale.bandwidth() / 2}
+                    y={yScale(d.value) - labelOffsetY}
+                    textAnchor="middle"
+                    dy="0.35em"
+                    fontSize="12px"
+                    fill="black"
+                >
+                    {d.name}
+                </text>
+                </g>
+                ))}
+            </g>
+        </svg>
     );
 }
 
-export default typeBarChart;
+export default TypeBarChart;

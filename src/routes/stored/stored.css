@@ -9,3 +9,16 @@
     border-radius: 10px;
     color: white;
 }
+
+.provisioning-bar {
+    fill: var(--color-provisioning); 
+}
+.regulating-bar {
+    fill: var(--color-regulating); 
+}
+.cultural-bar {
+    fill: var(--color-cultural); 
+}
+.supporting-bar {
+    fill: var(--color-supporting); 
+}

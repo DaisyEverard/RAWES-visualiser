@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import Chart from "../../../D3Graphs/chart";
+import TypeBarChart from "../../../D3Graphs/typeBarChart";
 import { getAllMetadata, getFormByTimestamp, deleteFormByTimestamp } from "../../utils/api";
 import ConfirmDeleteModal from "./confirmDeleteModal";
 import './stored.css';
@@ -25,8 +25,7 @@ const Stored = () => {
         if (showModal == 'none') {
             setShowModal('flex')
         } else {
-            setShowModal('none')
-            setMetadata([]) 
+            setShowModal('none') 
         }
     }
 
@@ -60,9 +59,9 @@ const Stored = () => {
             <p>ALL</p>
             <p>DATA</p>
         </button>
-        <ConfirmDeleteModal show={showModal} handleClose={toggleModal}/>
+        <ConfirmDeleteModal show={showModal} handleClose={toggleModal} setMetadata={setMetadata}/>
         <div>
-            <Chart currentForm={currentForm}></Chart>
+            <TypeBarChart formObject={currentForm}/>
         </div>
     </div>   
 }

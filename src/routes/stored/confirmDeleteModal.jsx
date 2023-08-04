@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import {deleteAllForms} from "../../utils/api.js"; 
 
-const ConfirmDeleteModal = ({show, handleClose}) => {
+const ConfirmDeleteModal = ({show, handleClose, setMetadata}) => {
 
     return <div style={{display: show}} id="confirm-delete-modal" className="flex-col">
         <h1>DELETE ALL DATA?</h1>
@@ -15,6 +15,7 @@ const ConfirmDeleteModal = ({show, handleClose}) => {
             <button className="delete-bttn" onClick={() => {
                 // send delete to api
                 deleteAllForms(); 
+                setMetadata([]); 
                 handleClose(); 
             }}>Delete</button>
         </div>

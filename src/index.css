@@ -2,6 +2,10 @@
   margin: 0;
   padding: 0;
   text-align: center;
+  --color-provisioning: rgb(42 88 42);
+  --color-regulating:  rgb(24, 24, 143);
+  --color-cultural: rgb(121, 121, 19);
+  --color-supporting: rgb(105, 13, 13);
 }
 
 .body {
