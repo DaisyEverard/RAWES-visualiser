@@ -5,7 +5,7 @@ import React, { useEffect, useState } from 'react';
     const [filteredData, setFilteredData] = useState([]); 
  
     const filterData = (form) => {
-        const valueObj =  {provisioning: 0, cultural: 0, regulating: 0, supporting: 0}
+        const valueObj =  {provisioning: 0,  regulating: 0, cultural: 0,supporting: 0}
         form.forEach(service => {
             const type = service.serviceType; 
             const value = parseFloat(service.value);
@@ -13,8 +13,8 @@ import React, { useEffect, useState } from 'react';
         })
         const updatedData = [
             {name: "provisioning", value: valueObj.provisioning},
-            {name: "cultural", value: valueObj.cultural},
             {name: "regulating", value: valueObj.regulating},
+            {name: "cultural", value: valueObj.cultural},
             {name: "supporting", value: valueObj.supporting}
         ]
         setFilteredData(updatedData); 

@@ -15,7 +15,7 @@ const getApiData = async (route) => {
     }
 }
 const getAllMetadata = async () => {
-    const route = 'getMetadata';
+    const route = 'formMetadata';
     const result = await getApiData(route);
     const arrayOfRows = result.data.rows; 
     const unfilteredArray = result.data.rows; 
@@ -64,7 +64,7 @@ const putNewForm = async (data, metadata) => {
     for (let i = 0; i < data.length; i++) {
         putNewRow(data[i], metadata.timestamp); 
     }
-    const queryUrl = base_url + 'putMetadata';
+    const queryUrl = base_url + 'formMetadata';
     const body = {
         timestamp: metadata.timestamp, 
         assessor: metadata.assessor,
@@ -92,7 +92,6 @@ const deleteAllForms = async () => {
         console.error(error); 
     }
 }
-
 
 export {getTemplateList,
      getFormByTimestamp,

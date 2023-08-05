@@ -4,6 +4,7 @@ import Row from "./row";
 
 const Table = ({serviceType}) => {
   const [list, updateList] = useState([""]);
+  // add id to items in list to render? 
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
