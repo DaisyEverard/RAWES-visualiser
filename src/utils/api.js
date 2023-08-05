@@ -25,14 +25,14 @@ const getAllMetadata = async () => {
     return filteredArray; 
 }
 const getTemplateList = async (type) => {
-    const route = 'getTemplate/' + type; 
+    const route = 'templates/' + type; 
     const result = await getApiData(route);
     const arrayOfRows = result.data.rows;
     const arrayOfServices = arrayOfRows.map((row) => row["service_name"]);   
     return arrayOfServices; 
 }
 const getFormByTimestamp = async (timestamp) => {
-    const route = `getFormHistory/?timestamp=${timestamp}`;
+    const route = `formHistory/?timestamp=${timestamp}`;
     const result = await getApiData(route); 
     const unfilteredArray = result.data.rows; 
     const filteredArray = unfilteredArray.map((row) => {
@@ -50,7 +50,7 @@ const putToApi = async (route, body) => {
     }
 }
 const putNewRow = async (data, timestamp) => {
-    const queryUrl = base_url + 'putRow';
+    const queryUrl = base_url + 'formHistory';
     const body = {
         timestamp: timestamp, 
         name: data.name,
@@ -76,7 +76,7 @@ const putNewForm = async (data, metadata) => {
 // DELETE
 const deleteFormByTimestamp = async (timestamp) => {
     try {
-        const result = await axios.delete(base_url + 'deleteForm', {
+        const result = await axios.delete(base_url + 'formHistory', {
             timestamp: timestamp
         });
         return result; 
@@ -86,7 +86,7 @@ const deleteFormByTimestamp = async (timestamp) => {
 }
 const deleteAllForms = async () => {
     try {
-        const result = await axios.delete(base_url + 'deleteAllForms')
+        const result = await axios.delete(base_url + 'allForms')
         return result;
     } catch (error) {
         console.error(error); 
